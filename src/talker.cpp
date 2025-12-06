@@ -1,9 +1,9 @@
-#include <iostream>
-#include <cstdlib>
+#include <chrono>
+#include <functional>
+#include <memory>
+#include <string>
 
-int main()
-{
-    std::cout << "Hello world!" << std::endl;
-
-    return EXIT_SUCCESS;
-}
+// Include the standard ROS 2 C++ client library
+#include "rclcpp/rclcpp.hpp"
+// Include the standard string message type
+#include "std_msgs/msg/string.hpp"
