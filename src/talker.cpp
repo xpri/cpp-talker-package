@@ -71,9 +71,12 @@ private:
             The data.c_str() is that it converts it to a c-style string which is required for the logging in the macro.
         */
         RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message->data.c_str());
-
-
-
+        
+        /*
+            Enters and accesses the publisher_'s publish function and moves the message object of String data type from the macro to be used
+            for the publish function. Since message is a smart pointer then only one "owner" can access or "own" the pointer at a time.
+            Since the timer_callback is using the pointer currently then its ownership will be transferred to the publish function member inside of publisher_
+        */
+        publisher_->publish(std::move(message));
     }
-
 }
