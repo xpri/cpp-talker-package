@@ -34,7 +34,27 @@ public:
         */
         publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
         // Btw 'this->' is just refering to the pointer of the current instance of the talker_publisher object that it is referring to.
+        
+        /*
+            Activates the timer_ variable as an object with the create_wall_timer function from the ros2 node library.
+            The create_wall_timer function monitors the real world time aka the "wall clock"
+            It makes a "tick" every 500ms or twice a second for every second in actual real world. So every 500ms it calls something...
+            std::bind(&TalkerPublisher::timer_callback, this) is what it calls every 500ms. or every time the "alarm" goes off (500ms thing)
+            std::bind squishes everything inside into one thing that the alarm can go off for.
+            &TalkerPublisher::timer_callback is specifying where to look for the code. The & gets the memory address of the function and
+            the TalkerPublisher::timer_callback specifies that the timer_callback is inside of the TalkerPublisher blueprint.
+            this is the single and most important piece of code. It says that when you run that specific thing you run them on ME. aka the 
+            specific TalkerPublisher object, the one we are currently inside
+        */
+        timer_= this->create_wall_timer(500ms, std::bind(&TalkerPublisher::timer_callback, this));
     }
 private:
-
+    void timer_callback()
+    {
+    /*
+        Smarter way to use c++ smart pointers. It calles make_unique which is a robust way to delete the pointer after it is done using it (blah blah blah)
+        Then the <std_msgs::msg::String>() means it creates an actual message object of the String data type.
+    */ 
+    auto message = std::make_unique<std_msgs::msg::String>();
+    }
 }
