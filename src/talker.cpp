@@ -52,18 +52,28 @@ private:
 
     void timer_callback()
     {
-    /*
-        Smarter way to use c++ smart pointers. It calles make_unique which is a robust way to delete the pointer after it is done using it (blah blah blah)
-        Then the <std_msgs::msg::String>() means it creates an actual message object of the String data type.
-    */ 
-    auto message = std::make_unique<std_msgs::msg::String>();
-    }
+        /*
+            Smarter way to use c++ smart pointers. It calles make_unique which is a robust way to delete the pointer after it is done using it (blah blah blah)
+            Then the <std_msgs::msg::String>() means it creates an actual message object of the String data type.
+        */ 
+        auto message = std::make_unique<std_msgs::msg::String>();
+        /* 
+            -> means to go to what the pointer message holds (in this case a message object of the String data type) and access it.
+            (goes to what message points to and access the "data"). In this case it assignes a value to the data variable. And stores
+            the hello world plus blah. The blah is a to string of the current count (and increments it after that current line of code is called).
+        */
+        message->data = "Hello World: " + std::to_string(count_++);
+        
+        /*
+            This is a logging macro provided by the ros2 library. It outputs the message content to the console/log file with the INFO severity level.
+            this->get_logger() gets the logger associated with this node. All nodes are automatically initialized with their own log.
+            And the macro needs to know which node is sending what log. It would input something similar to [INFO] [minimal_publisher]:
+            The data.c_str() is that it converts it to a c-style string which is required for the logging in the macro.
+        */
+        RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message->data.c_str());
 
-    /* 
-        -> means to go to what the pointer message holds (in this case a message object of the String data type) and access it.
-        (goes to what message points to and access the "data"). In this case it assignes a value to the data variable. And stores
-        the hello world plus blah. The blah is a to string of the current count (and increments it after that current line of code is called).
-    */
-    message->data = "Hello World: " + std::to_string(count_++);
+
+
+    }
 
 }
