@@ -29,7 +29,7 @@ public:
             Activates the publisher_ variable as an object with the create_publisher function from the ros2 node library. 
             the std_msgs::msg::String is just a parameter for create_publisher to create a ros2 object that only accepts that specific data type.
             ("topic", 10) is another parameter. It publishes data to the channel called "topic". The 10 is a buffer, aka it can only store up to 10
-            messages. If another message wants to send and there are already 10 messages in the buffer, the message fails.
+            messages. If another message wants to send and there are already 10 messages in the buffer, the oldest message gets dropped.
             Difference between the <> and (), the <> are for things that are static and never change. And the () are for dynamic things that could change later on.
         */
         publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
@@ -47,6 +47,7 @@ public:
             specific TalkerPublisher object, the one we are currently inside
         */
         timer_= this->create_wall_timer(500ms, std::bind(&TalkerPublisher::timer_callback, this));
+        // The resulting object is now called a "function object" or "callable" in c++.
     }
 private:
 
@@ -79,4 +80,9 @@ private:
         */
         publisher_->publish(std::move(message));
     }
-}
+    // Private member variables
+
+    rclcpp::TimerBase::SharedPtr timer_;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+    size_t count_;
+};
