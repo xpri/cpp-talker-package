@@ -49,6 +49,7 @@ public:
         timer_= this->create_wall_timer(500ms, std::bind(&TalkerPublisher::timer_callback, this));
     }
 private:
+
     void timer_callback()
     {
     /*
@@ -57,4 +58,12 @@ private:
     */ 
     auto message = std::make_unique<std_msgs::msg::String>();
     }
+
+    /* 
+        -> means to go to what the pointer message holds (in this case a message object of the String data type) and access it.
+        (goes to what message points to and access the "data"). In this case it assignes a value to the data variable. And stores
+        the hello world plus blah. The blah is a to string of the current count (and increments it after that current line of code is called).
+    */
+    message->data = "Hello World: " + std::to_string(count_++);
+
 }
