@@ -86,3 +86,21 @@ private:
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
     size_t count_;
 };
+
+int main(int argc, char * argv[])
+{
+    // Initializes the communication layer of the ros2 node with the inputs from the command line with argc, and argv.
+    rclcpp::init(argc, argv);
+
+    // Make an object of the MinimalPublisher class
+    rclcpp::spin(std::make_shared<TalkerPublisher>());
+    /*
+        This takes the object and puts it into an infinite processing loop. This also blocks the rest of the code until "spin" exits. While it is spinning ROS2
+        constantly monitors the node for events. (like incoming data/data requests from other nodes or the timer function I also made).
+        The loop only exits when ROS2 is terminated (aka like ctrl + c).
+    */
+    // Once spin exits shutdown the communication layer
+    rclcpp::shutdown();
+    
+    return EXIT_SUCCESS;
+}
