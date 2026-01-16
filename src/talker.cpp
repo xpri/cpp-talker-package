@@ -7,6 +7,8 @@
 #include "rclcpp/rclcpp.hpp"
 // Include the standard string message type library
 #include "std_msgs/msg/string.hpp"
+// Include the new custom message header
+#include "sandbox_interfaces/msg/sensor_data.hpp"
 
 // To use s, ms, etc
 using namespace std::chrono_literals;
