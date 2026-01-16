@@ -31,7 +31,7 @@ class TalkerPublisher : public rclcpp::Node
                     auto message = sandbox_interfaces::msg::SensorData();
                     
                     message.sensor_id = this->count_;
-                    message.status = "Operating Normally!";
+                    message.status = "HELLO WORLDDD";
                     message.temperature = 72;      // Saying in fahrenheit
                     message.active = true;
 
