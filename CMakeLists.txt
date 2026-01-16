@@ -28,12 +28,16 @@ endif()
 add_executable (${PROJECT_NAME})
 
 set(PROJECT_SOURCES
-    "src/talkerNEW.cpp"
+  "src/talkerNEW.cpp"
 )
 
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
 
-ament_target_dependencies(${PROJECT_NAME} rclcpp std_msgs)
+ament_target_dependencies(${PROJECT_NAME}
+  rclcpp
+  std_msgs
+  sandbox_interfaces
+  )
 
 install(TARGETS
   ${PROJECT_NAME}
