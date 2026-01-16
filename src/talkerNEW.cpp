@@ -30,9 +30,9 @@ class TalkerPublisher : public rclcpp::Node
                 {
                     auto message = sandbox_interfaces::msg::SensorData();
                     
-                    message.sensor_id = this->count_
+                    message.sensor_id = this->count_;
                     message.status = "Operating Normally!";
-                    message.temperature = "72";      // Saying in fahrenheit
+                    message.temperature = 72;      // Saying in fahrenheit
                     message.active = true;
 
                     RCLCPP_INFO(this->get_logger(), "Publishing ID: #%d | Temperature = %d", message.sensor_id, message.temperature);
@@ -52,7 +52,7 @@ class TalkerPublisher : public rclcpp::Node
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MinimalPublisher>());
+  rclcpp::spin(std::make_shared<TalkerPublisher>());
   rclcpp::shutdown();
   return 0;
 }
