@@ -35,7 +35,7 @@ class TalkerPublisher : public rclcpp::Node
                     message.temperature = 72;      // Saying in fahrenheit
                     message.active = true;
 
-                    RCLCPP_INFO(this->get_logger(), "Publishing ID: #%d | Temperature = %d", message.sensor_id, message.temperature);
+                    RCLCPP_INFO(this->get_logger(), "Publishing ID: #%d | Temperature = %f", message.sensor_id, message.temperature);
                                         
                     this->count_++;
 
