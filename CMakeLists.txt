@@ -10,6 +10,7 @@ find_package(ament_cmake REQUIRED)
 
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(sandbox_interfaces)
 
 
 if(BUILD_TESTING)
@@ -27,7 +28,7 @@ endif()
 add_executable (${PROJECT_NAME})
 
 set(PROJECT_SOURCES
-    "src/talker.cpp"
+    "src/talkerNEW.cpp"
 )
 
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
